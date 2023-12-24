@@ -27,6 +27,7 @@ const handleMouseOver = event => {
         event.target.dataset.interactionsCount = interactionsCount + 1;
     }
 }
+
 const darkenColor = (color, factor) => {
 
     const rgbValues = color.match(/\d+/g).map(Number);
@@ -44,7 +45,7 @@ const getRandomColor = () => {
 const resetGrid = () => {
     const newSize = prompt("Enter a new grid size");
     if (newSize === null || newSize === '') return;
-    if (newSize < 1 || newSize > 100) return alert("Please enter a number between 1 and 100");
+    if (newSize < 1 || newSize > 100|| isNaN(value)) return alert("Please enter a number between 1 and 100");
 
 
     squaresContainer.innerHTML = '';
