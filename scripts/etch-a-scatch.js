@@ -9,21 +9,36 @@ const createGrid = size => {
         for (let j = 0; j < size; j++) {
             const squareDiv = document.createElement('div');
             squareDiv.classList.add('square');
-            squareDiv.style.width = `${(MAX_WIDTH / size) }px`;
+            squareDiv.style.width = `${(MAX_WIDTH / size)}px`;
             squareDiv.style.height = `${(MAX_WIDTH / size)}px`;
+            squareDiv.dataset.interactionsCount = 0;
             squaresContainer.appendChild(squareDiv);
+            squareDiv.addEventListener('mouseover', handleMouseOver);
         }
     }
-
-    const gridItems = document.querySelectorAll('.square');
-    gridItems.forEach((item) => {
-        item.addEventListener('mouseover', handleMouseOver);
-    });
 }
 
 const handleMouseOver = event => {
-    // Add the "hovered" class to change the background color on hover
-    event.target.classList.add('hovered');
+    const currentColor = event.target.style.backgroundColor || getRandomColor();
+    const interactionsCount = parseInt(event.target.dataset.interactionsCount);
+    if (interactionsCount < 10) {
+        const darkenedColor = darkenColor(currentColor, 0.1);
+        event.target.style.backgroundColor = darkenedColor;
+        event.target.dataset.interactionsCount = interactionsCount + 1;
+    }
+}
+const darkenColor = (color, factor) => {
+
+    const rgbValues = color.match(/\d+/g).map(Number);
+    const darkenedValues = rgbValues.map(value => Math.max(value - Math.floor(value * factor), 0));
+    return `rgb(${darkenedValues.join(', ')})`;
+}
+
+const getRandomColor = () => {
+    const randomR = Math.floor(Math.random() * 256);
+    const randomG = Math.floor(Math.random() * 256);
+    const randomB = Math.floor(Math.random() * 256);
+    return `rgb(${randomR}, ${randomG}, ${randomB})`;
 }
 
 const resetGrid = () => {
