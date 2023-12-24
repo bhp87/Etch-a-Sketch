@@ -7,7 +7,7 @@
 
 .squares-container {
     max-width: 960px;
-    max-height: 960px;
+    max-height: 962px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -17,12 +17,6 @@
 
 
 }
-
-.square {
-
-    /* border: 1px solid #ccc; */
-}
-
 .hovered {
     background-color: black;
 }
