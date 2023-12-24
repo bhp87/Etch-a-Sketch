@@ -43,9 +43,11 @@ const getRandomColor = () => {
 }
 
 const resetGrid = () => {
-    const newSize = prompt("Enter a new grid size");
-    if (newSize === null || newSize === '') return;
-    if (newSize < 1 || newSize > 100|| isNaN(value)) return alert("Please enter a number between 1 and 100");
+    let  newSize = prompt("Enter a new grid size");
+    if (newSize === null || newSize === '') {
+        newSize = 16;
+    };
+    if (newSize < 1 || newSize > 100 || (typeof newSize !== 'number' && isNaN(newSize))) return alert("Please enter a number between 1 and 100");
 
 
     squaresContainer.innerHTML = '';
